@@ -24,6 +24,7 @@
 #include <k/kstd.h>
 
 #include "multiboot.h"
+#include "include/k/kgdt.h"
 
 
 void k_main(unsigned long magic, multiboot_info_t *info)
@@ -34,6 +35,10 @@ void k_main(unsigned long magic, multiboot_info_t *info)
 	char star[4] = "|/-\\";
 	char *fb = (void *)0xb8000;
 
+	initSerial();
+
+	struct segmentDescriptor test;
+	printf("%d", sizeof(struct segmentDescriptor));
 	for (unsigned i = 0; ; ) {
 		*fb = star[i++ % 4];
 	}
